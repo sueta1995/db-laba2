@@ -2,7 +2,7 @@ CREATE TABLE projects (
     id integer PRIMARY KEY,
     cipher integer UNIQUE NOT NULL,
     name text UNIQUE NOT NULL,
-    deadline timespamp NOT NULL,
+    deadline timestamp NOT NULL,
     laboriousness integer NOT NULL
 );
 
