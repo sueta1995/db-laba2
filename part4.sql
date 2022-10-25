@@ -5,12 +5,12 @@ CREATE FUNCTION employees_check() RETURNS trigger AS $employees_check$
             RAISE EXCEPTION 'Имя сотрудника не может быть NULL';
         END IF;
         IF NEW.function IS NULL THEN
-            RAISE EXCEPTION '% не может иметь должность со значением NULL', NEW.empname;
+            RAISE EXCEPTION '% не может иметь должность со значением NULL';
         END IF;
 
         -- Проверка уникальности имени нового сотрудника
-        IF NEW.full_name IN (SELECT full_name FROM employees) THEN
-            RAISE EXCEPTION '% cannot have a negative salary', NEW.empname;
+        IF UPPER(NEW.full_name) IN (SELECT full_name FROM employees) THEN
+            RAISE EXCEPTION '% уже существует в таблице';
         END IF;
         
         RETURN NEW;
