@@ -13,6 +13,9 @@ CREATE FUNCTION employees_check() RETURNS trigger AS $employees_check$
             RAISE EXCEPTION '% уже существует в таблице', NEW.full_name;
         END IF;
         
+        NEW.full_name := UPPER(NEW.full_name);
+        NEW.function := UPPER(NEW.function);
+        
         RETURN NEW
     END;
 $employees_check$ LANGUAGE plpgsql;
